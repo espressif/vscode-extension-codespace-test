@@ -1,19 +1,47 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.183.0/containers/ubuntu
 {
-    "$schema": "https://raw.githubusercontent.com/microsoft/vscode/master/extensions/configuration-editing/schemas/devContainer.schema.json",
-    "name": "ESP-IDF project",
-    "image": "espressif/idf:release-v4.1",
-    "extensions": [
-        "espressif.esp-idf-extension"
-    ],
-    "containerEnv": {
-        "IDF_CCACHE_ENABLE": "1",
-    },
-    "settings": {
-        "idf.espIdfPath": "/opt/esp/idf",
-        "idf.toolsPath": "/opt/esp",
-        "idf.pythonBinPath": "/opt/esp/python_env/idf4.1_py3.6_env/bin/python",
-        "idf.customExtraPaths": "/opt/esp/tools/xtensa-esp32-elf/esp-2020r3-8.4.0/xtensa-esp32-elf/bin:/opt/esp/tools/xtensa-esp32s2-elf/esp-2020r3-8.4.0/xtensa-esp32s2-elf/bin:/opt/esp/tools/esp32ulp-elf/2.28.51-esp-20191205/esp32ulp-elf-binutils/bin:/opt/esp/tools/esp32s2ulp-elf/2.28.51-esp-20191205/esp32s2ulp-elf-binutils/bin:/opt/esp/tools/cmake/3.13.4/bin:/opt/esp/tools/openocd-esp32/v0.10.0-esp32-20191114/openocd-esp32/bin:/opt/esp/python_env/idf4.1_py3.6_env/bin:/opt/esp/idf/tools",
-        "idf.customExtraVars": "{\"OPENOCD_SCRIPTS\":\"/opt/esp/tools/openocd-esp32/v0.10.0-esp32-20191114/openocd-esp32/share/openocd/scripts\"}",
-        "idf.saveScope": 2,
-    }
+	"name": "ESP-IDF QEMU",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	// Add the IDs of extensions you want installed when the container is created
+	"workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+	/* the path of workspace folder to be opened after container is running
+	 */
+	"workspaceFolder": "${localWorkspaceFolder}",
+	"mounts": [
+		"source=extensionCache,target=/root/.vscode-server/extensions,type=volume"
+	],
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"idf.espIdfPath": "/opt/esp/idf",
+				"idf.customExtraPaths": "",
+				"idf.pythonBinPath": "/opt/esp/python_env/idf5.2_py3.8_env/bin/python",
+				"idf.toolsPath": "/opt/esp",
+				"idf.gitPath": "/usr/bin/git"
+			},
+			"extensions": [
+				"ms-vscode.cpptools",
+				"espressif.esp-idf-extension"
+			],
+		},
+		"codespaces": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"idf.espIdfPath": "/opt/esp/idf",
+				"idf.customExtraPaths": "",
+				"idf.pythonBinPath": "/opt/esp/python_env/idf5.2_py3.8_env/bin/python",
+				"idf.toolsPath": "/opt/esp",
+				"idf.gitPath": "/usr/bin/git"
+			},
+			"extensions": [
+				"ms-vscode.cpptools",
+				"espressif.esp-idf-extension"
+			],
+		}
+	},
+	"runArgs": ["--privileged"]
 }
