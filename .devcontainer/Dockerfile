@@ -1,4 +1,5 @@
-FROM espressif/idf
+ARG DOCKER_TAG=latest
+FROM espressif/idf:${DOCKER_TAG}
 
 ARG CONTAINER_USER=esp
 ARG USER_UID=1050
