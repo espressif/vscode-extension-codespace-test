@@ -1,69 +1,46 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-H2 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+# ESP-IDF Template project for GitHub Codespaces 
 
-# Blink Example
+This project template can be used to build an ESP-IDF application in GitHub Codespaces, then flash it to the development board and monitor the output right from the web browser. No tools need to be installed locally.
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+> [!NOTE]
+> GitHub Codespaces is free for individuals for a limited time per month. See https://github.com/features/codespaces#pricing for details.
 
-This example demonstrates how to blink a LED by using the GPIO driver or using the [led_strip](https://components.espressif.com/component/espressif/led_strip) library if the LED is addressable e.g. [WS2812](https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf). The `led_strip` library is installed via [component manager](main/idf_component.yml).
+> [!WARNING]
+> This repository is a work in progress. If you run into any issue, please report it at https://github.com/espressif/vscode-extension-codespace-test/issues!
 
-## How to Use Example
+## How to Use the Template
 
-Before project configuration and build, be sure to set the correct chip target using `idf.py set-target <chip_name>`.
+1. In https://github.com/espressif/vscode-extension-codespace-test, press the dropdown on the green "Use this template" button on top right, and select "Open in a codespace".
 
-### Hardware Required
+2. The codespace will open and start up. This initial step might take a couple of minutes.
 
-* A development board with normal LED or addressable LED on-board (e.g., ESP32-S3-DevKitC, ESP32-C6-DevKitC etc.)
-* A USB cable for Power supply and programming
+3. To build the example project, press the :wrench: icon on the bottom bar.
 
-See [Development Boards](https://www.espressif.com/en/products/devkits) for more information about it.
+   Alternatively, press F1 to show all the commands, then type "idf build". Select "ESP-IDF: Build your project" command. The last used commands are kept at the top, so you don't need to type the name each time.
 
-### Configure the Project
+4. When the build is done, open the commands list again by pressing F1, and look for "ESP-IDF-Web Flash". Select this command.
 
-Open the project configuration menu (`idf.py menuconfig`).
+   You will receive several prompts:
 
-In the `Example Configuration` menu:
+   - Pick the workspace folder: select the only available option (`/workspaces`)
 
-* Select the LED type in the `Blink LED type` option.
-  * Use `GPIO` for regular LED
-  * Use `LED strip` for addressable LED
-* If the LED type is `LED strip`, select the backend peripheral
-  * `RMT` is only available for ESP targets with RMT peripheral supported
-  * `SPI` is available for all ESP targets
-* Set the GPIO number used for the signal in the `Blink GPIO number` option.
-* Set the blinking period in the `Blink period in ms` option.
+   - Web browser pop up will prompt you to select the serial port. Pick the port of your development board.
 
-### Build and Flash
+   - Select baud rate: pick the highest (921600). Retry with a lower one in case flashing fails.
 
-Run `idf.py -p PORT flash monitor` to build, flash and monitor the project.
+   Once you see "ESP-IDF Web Flashing done" message, it means that this step is completed.
 
-(To exit the serial monitor, type ``Ctrl-]``.)
+5. Open the commands list (F1) and select "ESP-IDF-Web Monitor". Select this command.
 
-See the [Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html) for full steps to configure and use ESP-IDF to build projects.
+   When prompted, pick:
 
-## Example Output
+   - The port of the development board
 
-As you run the example, you will see the LED blinking, according to the previously defined period. For the addressable LED, you can also change the LED color by setting the `led_strip_set_pixel(led_strip, 0, 16, 16, 16);` (LED Strip, Pixel Number, Red, Green, Blue) with values from 0 to 255 in the [source file](main/blink_example_main.c).
+   - The baud rate: select 115200
 
-```text
-I (315) example: Example configured to blink addressable LED!
-I (325) example: Turning the LED OFF!
-I (1325) example: Turning the LED ON!
-I (2325) example: Turning the LED OFF!
-I (3325) example: Turning the LED ON!
-I (4325) example: Turning the LED OFF!
-I (5325) example: Turning the LED ON!
-I (6325) example: Turning the LED OFF!
-I (7325) example: Turning the LED ON!
-I (8325) example: Turning the LED OFF!
-```
+   The monitor should open and you should see "Hello, World" being printed every second.
 
-Note: The color order could be different according to the LED model.
+## Hardware Required
 
-The pixel number indicates the pixel position in the LED strip. For a single LED, use 0.
+Any ESP32, ESP32-C, ESP32-H, ESP32-S or ESP32-P series development board. Make sure you have serial port drivers installed for this board.
 
-## Troubleshooting
-
-* If the LED isn't blinking, check the GPIO or the LED type selection in the `Example Configuration` menu.
-
-For any technical queries, please open an [issue](https://github.com/espressif/esp-idf/issues) on GitHub. We will get back to you soon.
