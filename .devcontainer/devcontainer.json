@@ -1,9 +1,12 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.183.0/containers/ubuntu
 {
-	"name": "ESP-IDF QEMU",
+	"name": "ESP-IDF Codespaces",
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"args": {
+			"DOCKER_TAG": "v5.3-rc1"
+		}
 	},
 	"customizations": {
 		"vscode": {
@@ -11,26 +14,20 @@
 				"terminal.integrated.defaultProfile.linux": "bash",
 				"idf.espIdfPath": "/opt/esp/idf",
 				"idf.customExtraPaths": "",
-				"idf.pythonBinPath": "/opt/esp/python_env/idf5.4_py3.12_env/bin/python",
+				"idf.pythonBinPath": "/opt/esp/python_env/idf5.3_py3.10_env/bin/python",
 				"idf.toolsPath": "/opt/esp",
-				"idf.gitPath": "/usr/bin/git"
-			},
-			"extensions": [
-				"espressif.esp-idf-extension"
-			]
-		},
-		"codespaces": {
-			"settings": {
-				"terminal.integrated.defaultProfile.linux": "bash",
-				"idf.espIdfPath": "/opt/esp/idf",
-				"idf.customExtraPaths": "",
-				"idf.pythonBinPath": "/opt/esp/python_env/idf5.4_py3.12_env/bin/python",
-				"idf.toolsPath": "/opt/esp",
-				"idf.gitPath": "/usr/bin/git"
+				"idf.gitPath": "/usr/bin/git",
+				"idf.showOnboardingOnInit": false,
+				"extensions.ignoreRecommendations": true
 			},
 			"extensions": [
 				"espressif.esp-idf-extension",
 				"espressif.esp-idf-web"
+			]
+		},
+		"codespaces": {
+			"openFiles": [
+				"README.md"
 			]
 		}
 	},
